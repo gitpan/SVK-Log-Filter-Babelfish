@@ -1,0 +1,16 @@
+---
+name: SVK-Log-Filter-Babelfish
+version: 0.0.1
+author: ~
+abstract: translate log messages using online services
+license: perl
+requires:
+  SVK: 2
+  WWW::Babelfish: 0.13
+build_requires:
+  Test::More: 0
+provides:
+  SVK::Log::Filter::Babelfish:
+    file: lib/SVK/Log/Filter/Babelfish.pm
+    version: 0.0.1
+generated_by: Module::Build version 0.2611
