@@ -4,12 +4,12 @@ use Module::Build;
 
 my $builder = Module::Build->new(
     module_name         => 'SVK::Log::Filter::Babelfish',
-    license             => 'perl',
+    license             => 'mit',
     dist_version_from   => 'lib/SVK/Log/Filter/Babelfish.pm',
     sign                => 1,
     create_makefile_pl  => 'passthrough',
     requires => {
-        'SVK'            => 2,
+        'SVK'            => '1.99',
         'WWW::Babelfish' => 0.13,
     },
     build_requires => {

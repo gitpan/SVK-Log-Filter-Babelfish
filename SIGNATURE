@@ -1,5 +1,5 @@
 This file contains message digests of all files listed in MANIFEST,
-signed via the Module::Signature module, version 0.44.
+signed via the Module::Signature module, version 0.54.
 
 To verify the content in this distribution, first make sure you have
 Module::Signature installed, then type:
@@ -14,20 +14,20 @@ not run its Makefile.PL or Build.PL.
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA1
 
-SHA1 b1356df56d74c54d256120b7ec117e2a128c2cc2 Build.PL
-SHA1 9548703f2a94ae1e15f471cd6a92dca15a006ef0 Changes
+SHA1 3ff7cf60964f64ba5c7c3ae2c220ee62da95a39b Build.PL
+SHA1 636428260bb3c382d634768680a6799dba10be39 Changes
 SHA1 25bab768f125a2bbe03d4ed909dc37a100835317 MANIFEST
-SHA1 e2f463adb3790b861f067b72e530deff810a5632 META.yml
-SHA1 a359d4072690a21ce63e4b393bdbc19d72b6be5a Makefile.PL
+SHA1 a4cf509ca526565357f07958ee1938ecbc0ad58b META.yml
+SHA1 cd14ada78fb37a0d926edd86eddcdf7f939de582 Makefile.PL
 SHA1 2e1eef1655096515c7c06e9029d0ee7fdabc2771 README
-SHA1 d4d828ee829cea2dc5c702b1bfdabea31cac71b1 lib/SVK/Log/Filter/Babelfish.pm
+SHA1 adc02be0899b8872cc0999cb4f6048b4823fe6e5 lib/SVK/Log/Filter/Babelfish.pm
 SHA1 c8f215c180d51f0bb42bee5cb94bd112d0020d84 t/0-signature.t
 SHA1 df0d7364f95628e6319fc892fb08499bd2181208 t/00-load.t
 SHA1 0190346d7072d458c8a10a45c19f86db641dcc48 t/pod.t
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.2.2 (GNU/Linux)
+Version: GnuPG v1.4.3 (GNU/Linux)
 
-iD8DBQFEajM82SxmMIGsLdwRAqQiAJ9wnLp65Nd4T5OwXZBojj8AzIDfYwCcD5U7
-INKch+mXJlAOOCk2GVh0YYM=
-=1F1s
+iD8DBQFE0mOe2SxmMIGsLdwRAp5cAJ4iQx5521LykGNrEODeyexpwTuY4gCfUVya
+KkXA1kqj4PLOMSBfee8DCFY=
+=L/ce
 -----END PGP SIGNATURE-----

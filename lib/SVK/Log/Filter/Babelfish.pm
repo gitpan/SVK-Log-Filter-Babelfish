@@ -3,40 +3,41 @@ package SVK::Log::Filter::Babelfish;
 use strict;
 use warnings;
 
-use SVK::Log::Filter;
+use base qw( SVK::Log::Filter );
 use WWW::Babelfish;
 
-our $VERSION = '0.0.1';
+our $VERSION = '0.0.2';
 
 sub setup {
-    my ($self, $stash) = @_[SELF, STASH];
+    my ($self) = @_;
 
     # create a WWW::Babelfish object
-    my $service = $ENV{BABELFISH_SERVICE} || 'Google';
+    my $service = $ENV{BABELFISH_SERVICE} || 'Babelfish';
     my $fish = WWW::Babelfish->new( service => $service );
     die "Can't create a babelfish using the '$service' service.\n"
         if !$fish;
-    $stash->{babelfish_fish} = $fish;
+    $self->{fish} = $fish;
 
     # determine the source and destination languages
-    my ( $src_lang, $dest_lang ) = split /\s+/, $stash->{argument};
+    my ( $src_lang, $dest_lang ) = split /\s+/, $self->{argument};
     ( $dest_lang, $src_lang ) = ( $src_lang, $dest_lang ) if !$dest_lang;
-    $stash->{babelfish_source}
+    $self->{source}
         = _lang_to_name( $fish, $src_lang ) || 'English';
-    $stash->{babelfish_destination}
+    $self->{destination}
         = _lang_to_name( $fish, $dest_lang ) || 'English';
 
     return;
 }
 
 sub revision {
-    my ($self, $props, $stash) = @_[SELF, PROPS, STASH];
+    my ($self, $args) = @_;
+    my $props = $args->{props};
 
-    my $src_name  = $stash->{babelfish_source};
-    my $dest_name = $stash->{babelfish_destination};
+    my $src_name  = $self->{source};
+    my $dest_name = $self->{destination};
     my $text      = $props->{'svn:log'};
 
-    my $fish = $stash->{babelfish_fish};
+    my $fish = $self->{fish};
     my $new_svn_log = $fish->translate(
         source      => $src_name,
         destination => $dest_name,
@@ -76,9 +77,9 @@ __END__
 
 =head1 NAME
 
-SVK::Log::Filter::Babelfish - translate log messages using online services
+SVK::Log::Filter::Babelfish - translate logs to various natural languages
 
-=head2 SYNOPSIS
+=head1 SYNOPSIS
 
     > svk log --filter 'babelfish de' //mirror/project/trunk
     ----------------------------------------------------------------------
@@ -109,9 +110,9 @@ is assumed to be English.  Here are some examples
 
 =head1 STASH/PROPERTY MODIFICATIONS
 
-Babelfish modifies the stash under the 'babelfish_' namespace.  It also
-modifies the 'svn:log' property for each revision, replacing the original text
-with the translated version.
+Babelfish modifies does not modify the stash.  It modifies the 'svn:log'
+property for each revision, replacing the original text with the translated
+version.
 
 =head1 BUGS
 
@@ -120,15 +121,28 @@ this is my problem or something from WWW::Babelfish.
 
 =head1 AUTHORS
 
-Michael Hendricks E<lt>michael@palmcluster.orgE<gt>
+Michael Hendricks <michael@ndrix.org>
 
-=head1 COPYRIGHT
+=head1 LICENSE AND COPYRIGHT
+ 
+The MIT License
 
-Copyright 2006 by Michael Hendricks E<lt>michael@palmcluster.orgE<gt>
+Copyright (c) 2006 Michael Hendricks (<michael@ndrix.org>).
 
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl itself.
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-See L<http://www.perl.com/perl/misc/Artistic.html>
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-=cut
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
