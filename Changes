@@ -1,4 +1,10 @@
 ---
+version : 0.0.3
+date    : 2006-08-03T21:50:44Z
+changes :
+    - derive from SVK::Log::Filter::Selection
+
+---
 version : 0.0.2
 date    : 2006-08-03T20:44:32Z
 changes :

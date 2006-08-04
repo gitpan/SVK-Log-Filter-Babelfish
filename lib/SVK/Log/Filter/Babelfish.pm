@@ -3,10 +3,10 @@ package SVK::Log::Filter::Babelfish;
 use strict;
 use warnings;
 
-use base qw( SVK::Log::Filter );
+use base qw( SVK::Log::Filter::Selection );
 use WWW::Babelfish;
 
-our $VERSION = '0.0.2';
+our $VERSION = '0.0.3';
 
 sub setup {
     my ($self) = @_;
